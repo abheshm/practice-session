@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Items
 
 # Create your views here.
@@ -18,3 +18,14 @@ def product_list(request):
     items=Items.objects.all()
 
     return render(request, "products.html",{"items":items})
+
+def update_product(request,id):
+    product=Items.objects.get(id=id)
+    if request.method=="POST":
+        product.name=request.POST["product"]
+        product.price=request.POST["price"]
+        product.save()
+
+        return redirect('product_list')
+    
+    return render(request, "update.html",{"product":product})

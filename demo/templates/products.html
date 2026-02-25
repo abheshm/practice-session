@@ -8,11 +8,17 @@
 <tr>
     <th>Product name</th>
     <th>Product price</th>
+    <th>Action</th>
 </tr>
 {% for item in items %}
 <tr>
     <td>{{item.product}}</td>
     <td>{{item.price}}</td>
+    <td>
+        <a href="{% url 'update_product' item.id %}">
+            <button>Edit</button>
+        </a>
+    </td>
 </tr>
 {% endfor %}
 </table>
